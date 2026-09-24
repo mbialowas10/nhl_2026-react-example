@@ -1,18 +1,17 @@
+import { TeamWithoutState } from "./components/TeamWithoutState";
+import { TeamWithState } from "./components/TeamWithState";
 
-import './App.css'
-import { TeamWithoutState } from './components/TeamWithoutState'
-import { TeamWithState } from './components/TeamWIthState'
-
-function App() {
-  
-
+export default function App() {
   return (
-    <>
-    {/* <TeamWithoutState/>*/}
-    <TeamWithState/>
-     
-    </>
-  )
-}
+    <main>
+      <h1>NHL Roster Explorer</h1>
+      <p>React State vs. Regular Variables</p>
 
-export default App
+      <TeamWithoutState />
+
+      <hr />
+
+      <TeamWithState />
+    </main>
+  );
+}
