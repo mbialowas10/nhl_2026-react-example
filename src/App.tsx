@@ -1,13 +1,16 @@
 
 import './App.css'
 import { TeamWithoutState } from './components/TeamWithoutState'
+import { TeamWithState } from './components/TeamWIthState'
 
 function App() {
   
 
   return (
     <>
-     <TeamWithoutState/>
+    {/* <TeamWithoutState/>*/}
+    <TeamWithState/>
+     
     </>
   )
 }
