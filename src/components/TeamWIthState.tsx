@@ -1,33 +1,53 @@
 import { useState } from "react";
 import { nhlTeams } from "../data/nhlTeams";
-import type { Team } from "../data/nhlTeams";
+
 
 export function TeamWithState() {
-  // React remembers the selected team
-  const [selectedTeam, setSelectedTeam] =
-    useState<Team>(nhlTeams[0]);
+  // Store the selected teams id in state
+  const [selectedTeamId, setSelectedTeamId] = useState<number>(0);
 
-  function changeTeam() {
-    setSelectedTeam(nhlTeams[1]);
-  }
+  // find the team that matches the selected id
+  const selectedTeam = nhlTeams.find(
+    (team) => team.id == selectedTeamId
+  )!;
 
-  return (
+ return (
     <div>
-      <h2>With State</h2>
+      <h2>NHL Player Lookup</h2>
 
-      <h3>{selectedTeam.name}</h3>
+      <label htmlFor="team">Select a team: </label>
 
-      <ul>
-        {selectedTeam.players.map((player) => (
-          <li key={player.id}>
-            {player.name} - {player.position}
-          </li>
+      <select
+        id="team"
+        value={selectedTeamId}
+        onChange={(event) =>
+          setSelectedTeamId(Number(event.target.value))
+        }
+      >
+        <option value={0}>-- Select an NHL Team --</option>
+
+        {nhlTeams.map((team) => (
+          <option key={team.id} value={team.id}>
+            {team.name}
+          </option>
         ))}
-      </ul>
+      </select>
 
-      <button onClick={changeTeam}>
-        Select Edmonton Oilers
-      </button>
+      {selectedTeam && (
+        <div>
+          <h3>{selectedTeam.name}</h3>
+
+          <h4>Players</h4>
+
+          <ul>
+            {selectedTeam.players.map((player) => (
+              <li key={player.id}>
+                {player.name} - {player.position}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
